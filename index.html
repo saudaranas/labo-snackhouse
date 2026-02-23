@@ -41,7 +41,7 @@
         .login-shop-name{font-size:1.05rem;font-weight:700;color:var(--dark-2);margin-bottom:28px;padding:14px 20px;background:rgba(249,115,22,0.08);border-radius:14px;border:1px solid rgba(249,115,22,0.12)}
         .pin-input{width:100%;padding:18px;border:2px solid var(--border);border-radius:14px;font-size:1.5rem;font-weight:700;text-align:center;letter-spacing:14px;margin-bottom:20px;transition:all 0.3s var(--ease);font-family:var(--font);background:var(--white)}.pin-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(249,115,22,0.1)}.pin-input::placeholder{letter-spacing:4px;font-size:1rem;color:var(--gray-lighter)}
         .btn-login{width:100%;padding:18px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);border:none;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s var(--ease);box-shadow:var(--shadow-primary);font-family:var(--font)}.btn-login:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(249,115,22,0.35)}.btn-login:active{transform:scale(0.98)}
-        .login-skip{margin-top:20px;color:var(--gray);font-size:0.85rem;cursor:pointer;font-weight:500;transition:color 0.2s}.login-skip:hover{color:var(--primary)}
+        
 
         /* ===== APP ===== */
         .app-container{display:none}.app-container.show{display:block}
@@ -552,7 +552,7 @@
         <div class="login-shop-name" id="loginShopName">Memuatkan...</div>
         <input type="password" class="pin-input" id="pinInput" placeholder="PIN" maxlength="6" inputmode="numeric" onkeyup="if(event.key==='Enter')doLogin()">
         <button class="btn-login" onclick="doLogin()">🔓 Masuk</button>
-        <p class="login-skip" onclick="skipLogin()">Masuk tanpa PIN →</p>
+        
     </div>
 </div>
 
@@ -967,7 +967,7 @@ async function doLogin(){
     if(r.success){S.staff=r.staff;saveSession();enterApp()}
     else{beep(false);toast('❌ '+(r.error||'PIN tidak sah'),'error')}
 }
-function skipLogin(){S.staff={name:'Admin',role:'admin'};saveSession();enterApp()}
+
 
 async function enterApp(){
     const isAdmin=S.staff.role==='admin';
@@ -1492,8 +1492,8 @@ async function init(){
         if(info.qrImage)S.qrImage=info.qrImage;if(info.bankName)S.bankName=info.bankName;if(info.bankAccount)S.bankAccount=info.bankAccount;if(info.bankHolder)S.bankHolder=info.bankHolder;if(info.featuredCategory)S.featuredCat=info.featuredCategory;
         if(C.PAKEJ==='premium'&&info.brandColor&&info.brandColor!=='#f97316'){document.documentElement.style.setProperty('--primary',info.brandColor);document.documentElement.style.setProperty('--primary-dark',info.brandColor)}
     }else{document.getElementById('loginShopName').innerHTML='⚠️ Gagal sambung<br><span style="font-size:0.75rem;color:var(--danger-dark)">'+esc(info.error||'Periksa URL API')+'</span>'}
-    if(C.PAKEJ==='asas')skipLogin();
-    else if(loadSession()){enterApp()}
+    
+    if(loadSession()){enterApp()}
     startDapurAutoRefresh();
 }
 init();
