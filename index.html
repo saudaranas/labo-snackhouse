@@ -41,7 +41,7 @@
         .login-shop-name{font-size:1.05rem;font-weight:700;color:var(--dark-2);margin-bottom:28px;padding:14px 20px;background:rgba(249,115,22,0.08);border-radius:14px;border:1px solid rgba(249,115,22,0.12)}
         .pin-input{width:100%;padding:18px;border:2px solid var(--border);border-radius:14px;font-size:1.5rem;font-weight:700;text-align:center;letter-spacing:14px;margin-bottom:20px;transition:all 0.3s var(--ease);font-family:var(--font);background:var(--white)}.pin-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(249,115,22,0.1)}.pin-input::placeholder{letter-spacing:4px;font-size:1rem;color:var(--gray-lighter)}
         .btn-login{width:100%;padding:18px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);border:none;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s var(--ease);box-shadow:var(--shadow-primary);font-family:var(--font)}.btn-login:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(249,115,22,0.35)}.btn-login:active{transform:scale(0.98)}
-        
+        .login-skip{margin-top:20px;color:var(--gray);font-size:0.85rem;cursor:pointer;font-weight:500;transition:color 0.2s}.login-skip:hover{color:var(--primary)}
 
         /* ===== APP ===== */
         .app-container{display:none}.app-container.show{display:block}
@@ -114,27 +114,26 @@
         .menu-item .item-badge{position:absolute;top:-6px;right:-6px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:800;box-shadow:0 4px 12px rgba(249,115,22,0.35)}
         .menu-item.just-added{animation:popIn 0.3s var(--ease)}@keyframes popIn{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
 
-        /* ===== CART — FIX: overflow hidden + proper border-radius ===== */
+        /* ===== CART ===== */
         .order-right .card{
             display:flex;flex-direction:column;
             border:1.5px solid var(--border);
             box-shadow:var(--shadow);
             padding:0;
             border-radius:var(--radius-lg);
-            overflow:hidden;  /* KEY FIX: children ikut border-radius */
+            overflow:hidden;
         }
         #cartCard .card-title{
             padding:16px 16px 12px;
             margin-bottom:0;
             border-bottom:1px solid var(--bg);
             background:var(--white);
-            border-radius:0;  /* parent handle radius */
+            border-radius:0;
         }
         #cartContent{display:none;flex-direction:column;flex:1;min-height:0}
         .cart-scroll{padding:0 16px;overflow-y:auto;overflow-x:hidden;flex:1;min-height:0}
         .cart-scroll::-webkit-scrollbar{width:4px}
         .cart-scroll::-webkit-scrollbar-thumb{background:var(--gray-lighter);border-radius:4px}
-        /* FIX: cart-footer corner bawah */
         .cart-footer{
             padding:14px 16px 16px;
             border-top:2px solid var(--bg);
@@ -223,8 +222,20 @@
         .qr-divider{display:flex;align-items:center;gap:10px;margin:10px 0;color:var(--gray-light);font-size:0.75rem;font-weight:600}
         .qr-divider::before,.qr-divider::after{content:'';flex:1;height:1px;background:var(--border)}
 
-        /* ===== ORDERS LIST ===== */
-        .order-card{background:var(--white);border:1px solid rgba(0,0,0,0.04);border-radius:var(--radius-lg);padding:14px;margin-bottom:10px;border-left:4px solid var(--success);box-shadow:var(--shadow-xs);transition:all 0.3s var(--ease)}
+        /* ===== ORDERS LIST — GRID ===== */
+        .orders-grid{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:10px;
+        }
+        @media(min-width:700px){
+            .orders-grid{grid-template-columns:repeat(2,1fr)}
+        }
+        @media(min-width:1100px){
+            .orders-grid{grid-template-columns:repeat(3,1fr)}
+        }
+
+        .order-card{background:var(--white);border:1px solid rgba(0,0,0,0.04);border-radius:var(--radius-lg);padding:14px;border-left:4px solid var(--success);box-shadow:var(--shadow-xs);transition:all 0.3s var(--ease);height:100%}
         .order-card:hover{box-shadow:var(--shadow)}
         .order-card.pending{border-left-color:var(--warning)}
         .order-card.cancelled{border-left-color:var(--danger);opacity:0.6}
@@ -245,6 +256,33 @@
         .order-filter{display:flex;gap:3px;margin:10px 0;background:var(--bg);padding:3px;border-radius:10px;flex-wrap:wrap}
         .order-filter-btn{flex:1;padding:7px 4px;border:none;border-radius:8px;background:transparent;font-size:0.72rem;font-weight:700;cursor:pointer;color:var(--gray);font-family:var(--font);transition:all 0.2s;min-width:60px}
         .order-filter-btn.active{background:var(--white);color:var(--primary);box-shadow:var(--shadow-xs)}
+
+        /* ===== DAPUR GRID ===== */
+        .dapur-grid{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:12px;
+        }
+        @media(min-width:700px){
+            .dapur-grid{grid-template-columns:repeat(2,1fr)}
+        }
+        @media(min-width:1100px){
+            .dapur-grid{grid-template-columns:repeat(3,1fr)}
+        }
+
+        /* ===== DAPUR KITCHEN DONE CARD ===== */
+        .dapur-order-card.kitchen-done{
+            border-color:var(--success-dark);
+            background:var(--success-light);
+            opacity:0.85;
+        }
+        .kitchen-done-banner{
+            display:flex;align-items:center;gap:8px;
+            background:var(--success-dark);color:white;
+            padding:8px 12px;border-radius:10px;
+            font-weight:800;font-size:0.82rem;
+            margin-bottom:8px;
+        }
 
         /* ===== SALES / CHARTS ===== */
         .sales-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
@@ -412,7 +450,7 @@
         /* ===== DAPUR ===== */
         .dapur-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
         .dapur-count-badge{background:var(--danger);color:white;padding:4px 12px;border-radius:20px;font-size:0.78rem;font-weight:800}
-        .dapur-order-card{background:var(--white);border:2px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;transition:all 0.3s;animation:fadeIn 0.4s var(--ease)}
+        .dapur-order-card{background:var(--white);border:2px solid var(--border);border-radius:16px;padding:16px;transition:all 0.3s;animation:fadeIn 0.4s var(--ease)}
         .dapur-order-card.urgent{border-color:var(--danger);background:var(--danger-light)}
         .dapur-order-card.normal{border-color:var(--warning);background:#fffbeb}
         .dapur-order-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px}
@@ -429,6 +467,7 @@
         .dapur-staff{font-size:0.7rem;color:var(--gray);margin-bottom:8px}
         .btn-siap{width:100%;padding:10px;background:linear-gradient(135deg,var(--success-dark),#059669);color:white;border:none;border-radius:10px;font-weight:800;font-size:0.88rem;cursor:pointer;font-family:var(--font);transition:all 0.2s}
         .btn-siap:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(16,185,129,0.3)}
+        .btn-siap:disabled{opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none;background:var(--success-dark)}
         .dapur-empty{text-align:center;padding:50px 20px;color:var(--gray)}
         .dapur-empty-icon{font-size:3rem;margin-bottom:12px}
         .auto-refresh-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg-2);border-radius:10px;font-size:0.75rem;color:var(--gray);margin-bottom:12px}
@@ -473,11 +512,9 @@
             .order-layout{display:flex;flex-direction:row;gap:20px;align-items:flex-start}
             .menu-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
             .order-right{width:380px;flex-shrink:0;position:sticky;top:110px;max-height:calc(100vh - 130px);overflow-y:auto}
-            /* FIX: sticky title dalam desktop — border-radius 0 sebab parent overflow:hidden handle */
             #cartCard .card-title{padding:16px 16px 12px;margin-bottom:0;border-bottom:1px solid var(--bg);position:sticky;top:0;background:var(--white);z-index:1;border-radius:0}
             #cartContent{display:flex;flex-direction:column}
             .cart-scroll{padding:0 16px}
-            /* FIX: sticky footer desktop — kekal corner radius bawah */
             .cart-footer{padding:14px 16px 16px;border-top:2px solid var(--bg);background:var(--white);position:sticky;bottom:0;border-radius:0 0 var(--radius-lg) var(--radius-lg)}
         }
         @media(min-width:1100px){.order-right{width:420px}.menu-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
@@ -533,6 +570,8 @@
             .receipt{padding:18px 14px;font-size:0.72rem}
             .login-card{padding:32px 24px;max-width:340px}.login-logo{font-size:1.8rem}.login-shop-name{font-size:0.95rem;padding:12px 16px}.pin-input{padding:14px;font-size:1.3rem;letter-spacing:10px}.btn-login{padding:15px;font-size:0.95rem}
             #qrBox img{max-width:220px}
+            .dapur-grid{grid-template-columns:1fr}
+            .orders-grid{grid-template-columns:1fr}
         }
         @media(max-width:380px){
             .menu-grid{grid-template-columns:repeat(2,1fr)}
@@ -552,7 +591,7 @@
         <div class="login-shop-name" id="loginShopName">Memuatkan...</div>
         <input type="password" class="pin-input" id="pinInput" placeholder="PIN" maxlength="6" inputmode="numeric" onkeyup="if(event.key==='Enter')doLogin()">
         <button class="btn-login" onclick="doLogin()">🔓 Masuk</button>
-        
+        <p class="login-skip" onclick="skipLogin()">Masuk tanpa PIN →</p>
     </div>
 </div>
 
@@ -689,9 +728,12 @@
                 <div class="card-title" style="margin-bottom:0">🔔 Papan Dapur</div>
                 <span class="dapur-count-badge" id="dapurCount">0 pesanan</span>
             </div>
+            <div class="form-group" style="margin-bottom:10px">
+                <input type="date" class="form-input" id="dapurDate" onchange="loadDapur()">
+            </div>
             <div class="auto-refresh-bar">
                 <div class="refresh-dot"></div>
-                <span>Auto kemaskini setiap 30 saat</span>
+                <span id="dapurAutoRefreshLabel">Auto kemaskini setiap 30 saat</span>
                 <button onclick="loadDapur()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--primary);font-weight:700;font-size:0.78rem;font-family:var(--font)">🔄 Muat Semula</button>
             </div>
         </div>
@@ -897,13 +939,24 @@
     </div>
 </div>
 
+<div class="modal-overlay" id="editStaffModal">
+    <div class="modal" style="max-width:400px">
+        <div class="modal-title">✏️ Edit Staff</div>
+        <input type="hidden" id="editStaffOldPin">
+        <div class="form-group"><label>Nama</label><input type="text" class="form-input" id="editStaffName" placeholder="Nama staff"></div>
+        <div class="form-group"><label>PIN Baru <span style="font-size:0.72rem;color:var(--gray-light)">(kosongkan jika tidak tukar)</span></label><input type="text" class="form-input" id="editStaffNewPin" placeholder="PIN baru" maxlength="6" inputmode="numeric"><input type="hidden" id="editStaffPin"></div>
+        <div class="form-group"><label>Peranan</label><select class="form-input" id="editStaffRole"><option value="staff">👤 Staff</option><option value="admin">👑 Admin</option></select></div>
+        <div class="modal-actions"><button class="btn btn-outline" onclick="closeM('editStaffModal')">Batal</button><button class="btn btn-success" onclick="saveEditStaff()">💾 Simpan</button></div>
+    </div>
+</div>
+
 <div id="waReceiptClone" style="position:fixed;left:-9999px;top:0;width:320px;background:white;padding:0;display:none;z-index:-1"></div>
 
 <script>
 // ============================================================
 // CONFIG & STATE
 // ============================================================
-const C={URL:'https://script.google.com/macros/s/AKfycbxTMA_hdp9uNN7dl59FcTw_pjwGpqZEdSW8-xTGbw7QyLdLhCcCRapfBi9MfzZLw62_wQ/exec',KEY:'aca6f58aac70a3c722e74b9e0488bd693637e056de95a296f6b40613104b1df7',PAKEJ:'premium'};
+const C={URL:'https://script.google.com/macros/s/AKfycbwACvAQzeSWeV0dta-ttCXDHM0hNURiO1lsOtpnEbqSo9glcu2gC6N6SkW_9bVzBe1Z/exec',KEY:'aca6f58aac70a3c722e74b9e0488bd693637e056de95a296f6b40613104b1df7',PAKEJ:'premium'};
 let S={menu:[],cart:[],orders:[],staff:{name:'Admin',role:'admin'},pay:'cash',cat:'Semua',editOid:null,editItems:[],shop:{shopName:'Kedai Makan',shopAddress:'',shopPhone:''},count:0,reportMode:'daily',orderFilter:'all',qrImage:'',bankName:'',bankAccount:'',bankHolder:'',completePay:'cash',completeOid:null,qrBase64:'',featuredCat:'',editPendingOid:null,editPendingItems:[],waReceiptText:'',completeOrderData:null};
 let salesCache={daily:null,weekly:null,monthly:null};
 const clientCache={};
@@ -917,6 +970,7 @@ function debounce(fn,ms=300){let t;return(...a)=>{clearTimeout(t);t=setTimeout((
 function today(){
     return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Kuala_Lumpur'});
 }
+
 // ============================================================
 // SESSION PERSISTENCE
 // ============================================================
@@ -968,7 +1022,7 @@ async function doLogin(){
     if(r.success){S.staff=r.staff;saveSession();enterApp()}
     else{beep(false);toast('❌ '+(r.error||'PIN tidak sah'),'error')}
 }
-
+function skipLogin(){S.staff={name:'Admin',role:'admin'};saveSession();enterApp()}
 
 async function enterApp(){
     const isAdmin=S.staff.role==='admin';
@@ -1005,7 +1059,7 @@ function go(tab,el){
     el.classList.add('active');
     document.getElementById('tab-'+tab).classList.add('active');
     if(tab==='list')loadOrders();
-    if(tab==='dapur')loadDapur();
+    if(tab==='dapur'){const dEl=document.getElementById('dapurDate');if(dEl&&!dEl.value)dEl.value=today();loadDapur();}
     if(tab==='sales'){initSalesTab();if(S.reportMode==='daily')loadDailySales();else if(S.reportMode==='weekly')loadWeeklySales();else loadMonthlySales()}
     if(tab==='menu')loadMenuManage();
     if(tab==='settings'){loadStaffList();loadSettingsForm()}
@@ -1218,13 +1272,20 @@ function renderOrders(){
     if(!l.length){c.innerHTML='<div class="empty"><div class="empty-icon">📋</div>Tiada pesanan'+(S.staff.role!=='admin'?' untuk anda':' pada tarikh ini')+'</div>';return}
     const pi={cash:'💵 Tunai',qr:'📱 QR',transfer:'🏦 Transfer'};
     try{
-        c.innerHTML=l.map(o=>{
-            const oid=String(o.orderId||'');const items=Array.isArray(o.items)?o.items:[];const itxt=items.map(i=>esc(String(i.name||''))+' ×'+(i.qty||1)).join(', ')||'-';const total=parseFloat(o.total)||0,discount=parseFloat(o.discount)||0;const cashReceived=parseFloat(o.cashReceived)||0,changeGiven=parseFloat(o.changeGiven)||0;const dn=o.status==='completed',pn=o.status==='pending',cn=o.status==='cancelled';const bc=dn?'badge-done':pn?'badge-pending':'badge-cancel';const bt=dn?'✅ Selesai':pn?'⏳ Belum':'❌ Batal';const cc=pn?'pending':cn?'cancelled':'';const safeOid=oid.replace(/'/g,"\\'");
+        const cardsHtml=l.map(o=>{
+            const oid=String(o.orderId||'');const items=Array.isArray(o.items)?o.items:[];const itxt=items.map(i=>esc(String(i.name||''))+' ×'+(i.qty||1)).join(', ')||'-';const total=parseFloat(o.total)||0,discount=parseFloat(o.discount)||0;const cashReceived=parseFloat(o.cashReceived)||0,changeGiven=parseFloat(o.changeGiven||0);const dn=o.status==='completed',pn=o.status==='pending',cn=o.status==='cancelled';const bc=dn?'badge-done':pn?'badge-pending':'badge-cancel';const bt=dn?'✅ Selesai':pn?'⏳ Belum':'❌ Batal';const cc=pn?'pending':cn?'cancelled':'';const safeOid=oid.replace(/'/g,"\\'");
+            const kitchenBadge=pn&&o.kitchenDone?'<span style="background:var(--success-light);color:var(--success-dark);padding:3px 8px;border-radius:8px;font-size:0.65rem;font-weight:700;margin-left:4px">🍳 Siap Masak</span>':'';
             const payInfo=dn?('<div class="order-pay">'+(pi[o.paymentMethod]||'💵 Tunai')+'</div>'+(o.paymentMethod==='cash'&&cashReceived>0?'<div style="font-size:0.72rem;color:var(--gray);margin-top:2px">Terima: RM'+cashReceived.toFixed(2)+' · Baki: RM'+changeGiven.toFixed(2)+'</div>':'')):'';
-            return'<div class="order-card '+cc+'"><div class="order-header"><div><div class="order-num">#'+(o.orderNo||'?')+'</div><div class="order-time">⏰ '+esc(String(o.time||'-'))+(o.tableNo&&o.tableNo!=='-'?' · 🪑 '+esc(o.tableNo):'')+'</div><div class="order-staff">👤 '+esc(String(o.staffName||'-'))+'</div></div><span class="order-badge '+bc+'">'+bt+'</span></div><div class="order-items">'+itxt+'</div><div class="order-bottom"><div><div class="order-total">RM '+total.toFixed(2)+'</div>'+(discount>0?'<div class="order-discount">🏷️ -RM'+discount.toFixed(2)+'</div>':'')+payInfo+'</div><div class="order-actions">'+(pn?'<button class="btn btn-warning btn-sm" onclick="openEditPendingById(\''+safeOid+'\')">✏️</button><button class="btn btn-success btn-sm" onclick="openCompleteById(\''+safeOid+'\')">💰</button><button class="btn btn-danger btn-sm" onclick="cancelOrd(\''+safeOid+'\')">🗑️</button>':'')+(dn?'<button class="btn btn-warning btn-sm" onclick="openEditById(\''+safeOid+'\')">✏️</button><button class="btn btn-danger btn-sm" onclick="cancelOrd(\''+safeOid+'\')">🗑️</button><button class="btn btn-info btn-sm" onclick="viewReceiptById(\''+safeOid+'\')">🧾</button>':'')+(cn?'<button class="btn btn-info btn-sm" onclick="viewReceiptById(\''+safeOid+'\')">🧾</button>':'')+'</div></div></div>'
+            return'<div class="order-card '+cc+'"><div class="order-header"><div><div class="order-num">#'+(o.orderNo||'?')+kitchenBadge+'</div><div class="order-time">⏰ '+esc(String(o.time||'-'))+(o.tableNo&&o.tableNo!=='-'?' · 🪑 '+esc(o.tableNo):'')+'</div><div class="order-staff">👤 '+esc(String(o.staffName||'-'))+'</div></div><span class="order-badge '+bc+'">'+bt+'</span></div><div class="order-items">'+itxt+'</div><div class="order-bottom"><div><div class="order-total">RM '+total.toFixed(2)+'</div>'+(discount>0?'<div class="order-discount">🏷️ -RM'+discount.toFixed(2)+'</div>':'')+payInfo+'</div><div class="order-actions">'
+            +(pn?'<button class="btn btn-warning btn-sm" onclick="openEditPendingById(\''+safeOid+'\')">✏️</button><button class="btn btn-success btn-sm" onclick="openCompleteById(\''+safeOid+'\')">💰</button><button class="btn btn-danger btn-sm" onclick="cancelOrd(\''+safeOid+'\')">🗑️</button>':'')
+            +(dn?'<button class="btn btn-danger btn-sm" onclick="cancelOrd(\''+safeOid+'\')">🗑️</button><button class="btn btn-info btn-sm" onclick="viewReceiptById(\''+safeOid+'\')">🧾</button>':'')
+            +(cn?'<button class="btn btn-info btn-sm" onclick="viewReceiptById(\''+safeOid+'\')">🧾</button>':'')
+            +'</div></div></div>';
         }).join('');
+        c.innerHTML='<div class="orders-grid">'+cardsHtml+'</div>';
     }catch(err){c.innerHTML='<div class="api-error-box"><strong>❌ Ralat render</strong><br>'+esc(err.message)+'</div>'}
 }
+
 function getOrderById(id){return S.orders.find(o=>o.orderId===id)}
 function openEditPendingById(id){const o=getOrderById(id);if(o)openEditPending(o)}
 function openCompleteById(id){const o=getOrderById(id);if(o)openComplete(o)}
@@ -1257,7 +1318,7 @@ function renderEditPendingItems(){let total=0;const el=document.getElementById('
 async function saveEditPending(){if(!S.editPendingItems.length){toast('Mesti ada 1 item!','error');return}const btn=document.querySelector('#editPendingModal .btn-success');btn.disabled=true;btn.textContent='⏳...';const r=await api('updateOrder',{orderId:S.editPendingOid,items:S.editPendingItems});btn.disabled=false;btn.textContent='💾 Simpan';if(r.success){beep(true);toast('✅ '+r.message);closeM('editPendingModal');clearClientCache();loadOrders()}else toast('❌ '+(r.error||'Gagal'),'error')}
 
 // ============================================================
-// COMPLETE ORDER
+// COMPLETE ORDER (dari Tab Senarai — cashier)
 // ============================================================
 function openComplete(o){
     S.completeOid=o.orderId;S.completePay='cash';S.completeOrderData=JSON.parse(JSON.stringify(o));
@@ -1322,12 +1383,6 @@ function makeCalHeatmap(ms,dd){const p=ms.split('-');const yr=parseInt(p[0]),mo=
 
 async function loadDailySales(){const d=document.getElementById('salesDate');if(!d||!d.value)return;document.getElementById('salesDash').innerHTML='<div class="loading"><div class="spinner"></div>Memuatkan...</div>';try{const r=await api('getDailySales',{date:d.value});if(!r.success){document.getElementById('salesDash').innerHTML='<div class="api-error-box"><strong>❌ Gagal muatkan laporan</strong>'+esc(r.error)+'</div>';return}salesCache.daily=r;const ts=parseFloat(r.totalRevenue||r.totalSales)||0;const totalOrders=parseInt(r.totalOrders)||0;const avgOrder=parseFloat(r.avgOrder||r.averageOrder)||0;const totalDiscount=parseFloat(r.totalDiscount)||0;const pc=parseInt(r.pendingOrders)||0;const pa=parseFloat(r.pendingAmount)||0;const cancelledOrders=parseInt(r.cancelledOrders)||0;const pb=r.byPayment||r.paymentBreakdown||{};const ti=r.topItems||[];const hd=r.byHour||r.hourlyData||{};const cs=r.cashSummary||null;const isT=d.value===today();document.getElementById('salesDash').innerHTML='<div class="today-badge">📅 '+formatDateMY(d.value)+(isT?' · Hari Ini':'')+'</div><div class="sales-grid"><div class="stat-card hero-stat"><div class="stat-value">RM '+ts.toFixed(2)+'</div><div class="stat-label">Jumlah Jualan</div></div><div class="stat-card"><div class="stat-value">'+totalOrders+'</div><div class="stat-label">✅ Selesai</div></div><div class="stat-card"><div class="stat-value" style="color:var(--danger-dark)">'+cancelledOrders+'</div><div class="stat-label">❌ Batal</div></div><div class="stat-card"><div class="stat-value" style="font-size:1.2rem">RM'+avgOrder.toFixed(2)+'</div><div class="stat-label">Purata / Pesanan</div></div>'+(pc>0?'<div class="stat-card"><div class="stat-value" style="color:var(--warning-dark)">'+pc+'</div><div class="stat-label">⏳ Belum Selesai</div><div class="stat-trend neutral">RM'+pa+'</div></div>':'')+(totalDiscount>0?'<div class="stat-card"><div class="stat-value" style="color:var(--success-dark);font-size:1.2rem">RM'+totalDiscount.toFixed(2)+'</div><div class="stat-label">🏷️ Diskaun</div></div>':'')+'</div>'+makePayStats(pb,ts)+(cs?makeCashSummary(cs):'')+(Object.keys(hd).length?'<div class="card"><div class="card-title">⏰ Mengikut Jam</div>'+makeHourlyChart(hd)+'</div>':'')+(ti.length?'<div class="card"><div class="card-title">🥧 Menu Terlaris</div>'+makeDonutChart(ti,6,'item')+'</div><div class="card"><div class="card-title">🏆 Terperinci</div>'+makeTopItems(ti)+'</div>':'<div class="card"><div style="text-align:center;padding:20px;color:var(--gray)">Tiada data menu hari ini</div></div>')}catch(e){document.getElementById('salesDash').innerHTML='<div class="api-error-box"><strong>❌ Ralat</strong>'+esc(e.message)+'</div>'}}
 
-// ============================================================
-// WEEKLY SALES — FIX MUKTAMAD
-// Guna 7 hari ke belakang (hari ini - 6 hingga hari ini).
-// Hantar startDate & endDate terus ke GAS supaya GAS guna
-// tarikh dari client (Malaysia), bukan server timezone (UTC).
-// ============================================================
 function dateAddDays(dateStr,n){
     const p=dateStr.split('-');
     const dt=new Date(+p[0],+p[1]-1,+p[2]+n);
@@ -1337,10 +1392,8 @@ function dateAddDays(dateStr,n){
 async function loadWeeklySales(){
     document.getElementById('salesDash').innerHTML='<div class="loading"><div class="spinner"></div>Memuatkan...</div>';
     try{
-        // 7 hari ke belakang — tak bergantung pada Isnin, tak ada masalah timezone
         const todayStr=today();
         const startStr=dateAddDays(todayStr,-6);
-        // Hantar kedua-dua tarikh terus ke GAS
         const r=await api('getWeeklySales',{startDate:startStr,endDate:todayStr});
         if(!r.success){document.getElementById('salesDash').innerHTML='<div class="api-error-box"><strong>❌ Gagal</strong>'+esc(r.error)+'</div>';return}
         salesCache.weekly=r;
@@ -1350,11 +1403,8 @@ async function loadWeeklySales(){
         const ti=r.topItems||[];
         const pb=r.byPayment||r.paymentBreakdown||{};
         const bd=r.byDate||{};
-
-        // Bina senarai 7 hari dari startStr hingga todayStr
         const days=[];
         for(let i=6;i>=0;i--)days.push(dateAddDays(todayStr,-i));
-
         const mx=Math.max(...days.map(d=>parseFloat(bd[d])||0),1);
         const dn=['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu'];
         const daysWithSales=days.filter(d=>(parseFloat(bd[d])||0)>0);
@@ -1367,7 +1417,6 @@ async function loadWeeklySales(){
         const worstDay=worst.date?new Date(worst.date+'T00:00:00'):null;
         const bestDayName=bestDay?dn[bestDay.getDay()]:'';
         const worstDayName=worstDay?dn[worstDay.getDay()]:'';
-
         const bars=days.map(d=>{
             const s=parseFloat(bd[d])||0;
             const h=Math.max(5,(s/mx)*130);
@@ -1376,7 +1425,6 @@ async function loadWeeklySales(){
             const isT=d===todayStr;
             return'<div class="chart-bar-wrap'+(isT?' today':'')+'"><div class="chart-bar-value">RM'+s.toFixed(0)+'</div><div class="chart-bar" style="height:'+h+'px;'+((!isT&&s===0)?'background:var(--gray-lighter);opacity:0.4':'')+'"></div><div class="chart-bar-label">'+nm+'<br>'+d.substring(8)+'</div></div>';
         }).join('');
-
         document.getElementById('salesDash').innerHTML=
             '<div class="sales-grid">'
             +'<div class="stat-card hero-stat"><div class="stat-value">RM '+wt.toFixed(2)+'</div><div class="stat-label">📅 7 Hari Terakhir</div></div>'
@@ -1417,8 +1465,13 @@ async function delMenu(id,n){if(!confirm('Padam "'+n+'"?'))return;const r=await 
 // ============================================================
 // STAFF & SETTINGS
 // ============================================================
-async function loadStaffList(){const r=await cachedApi('getStaffList',{},60000);if(r.success){const l=r.staffList||[];const c=document.getElementById('staffList');if(!l.length){c.innerHTML='<div class="empty"><div class="empty-icon">👥</div>Tiada staff</div>';return}c.innerHTML=l.map(s=>'<div class="staff-item"><div class="si-info"><div class="si-name">'+esc(s.name)+'</div><div class="si-role">'+(s.role==='admin'?'👑 Admin':'👤 Staff')+'</div></div><button class="btn btn-danger btn-sm" onclick="deleteStaff(\''+esc(s.pin)+'\',\''+esc(s.name).replace(/'/g,"\\'")+'\')">🗑️</button></div>').join('')}else document.getElementById('staffList').innerHTML='<div class="api-error-box"><strong>❌ Gagal</strong>'+esc(r.error)+'</div>'}
+async function loadStaffList(){const r=await cachedApi('getStaffList',{},60000);if(r.success){const l=r.staffList||[];const c=document.getElementById('staffList');if(!l.length){c.innerHTML='<div class="empty"><div class="empty-icon">👥</div>Tiada staff</div>';return}c.innerHTML=l.map(s=>{const isOriginalAdmin=s.role==='admin'&&_isFirstAdmin(s.pin,l);const safePin=esc(s.pin);const safeName=esc(s.name).replace(/'/g,"\\'");const showPin=showingPin[s.pin]||false;const pinDisplay=showPin?s.pin:'••••';return'<div class="staff-item"><div class="si-info"><div class="si-name">'+esc(s.name)+'</div><div class="si-role">'+(s.role==='admin'?'👑 Admin':'👤 Staff')+'</div><div class="si-pin" style="margin-top:3px;display:flex;align-items:center;gap:6px"><span style="font-size:0.72rem;color:var(--gray-light);font-weight:600">PIN: </span><span style="font-family:monospace;font-size:0.8rem;font-weight:700;letter-spacing:2px;color:var(--dark-3)">'+pinDisplay+'</span><button onclick="togglePin(\''+safePin+'\')" style="background:none;border:none;cursor:pointer;font-size:0.75rem;color:var(--primary);font-weight:600;padding:0;font-family:var(--font)">'+(showPin?'🙈 Sorok':'👁️ Lihat')+'</button></div></div><div style="display:flex;gap:5px;flex-shrink:0">'+(isOriginalAdmin?'<span style="font-size:0.68rem;color:var(--gray-light);padding:6px 8px;background:var(--bg-2);border-radius:8px;border:1px solid var(--border)">🔒 Dilindungi</span>':'<button class="btn btn-warning btn-sm" onclick="openEditStaff(\''+safePin+'\',\''+safeName+'\',\''+s.role+'\')">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteStaff(\''+safePin+'\',\''+safeName+'\')">🗑️</button>')+'</div></div>'}).join('')}else document.getElementById('staffList').innerHTML='<div class="api-error-box"><strong>❌ Gagal</strong>'+esc(r.error)+'</div>'}
 async function addStaff(){const p=document.getElementById('newStaffPin').value.trim(),n=document.getElementById('newStaffName').value.trim(),r2=document.getElementById('newStaffRole').value;if(!p||!n){toast('Isi PIN dan Nama!','error');return}const r=await api('addStaff',{pin:p,name:n,role:r2});if(r.success){toast('✅ '+r.message);document.getElementById('newStaffPin').value='';document.getElementById('newStaffName').value='';clearClientCache('getStaff');loadStaffList()}else toast('❌ '+(r.error||'Gagal'),'error')}
+const showingPin={};
+function _isFirstAdmin(pin,list){const admins=list.filter(s=>s.role==='admin');return admins.length>0&&String(admins[0].pin)===String(pin)}
+function togglePin(pin){showingPin[pin]=!showingPin[pin];loadStaffList()}
+function openEditStaff(pin,name,role){document.getElementById('editStaffPin').value=pin;document.getElementById('editStaffOldPin').value=pin;document.getElementById('editStaffName').value=name;document.getElementById('editStaffRole').value=role;document.getElementById('editStaffNewPin').value='';document.getElementById('editStaffModal').classList.add('show')}
+async function saveEditStaff(){const oldPin=document.getElementById('editStaffOldPin').value;const newPin=document.getElementById('editStaffNewPin').value.trim()||oldPin;const name=document.getElementById('editStaffName').value.trim();const role=document.getElementById('editStaffRole').value;if(!name){toast('Nama diperlukan!','error');return}const r=await api('editStaff',{oldPin,newPin,name,role});if(r.success){toast('✅ '+r.message);closeM('editStaffModal');clearClientCache('getStaff');loadStaffList()}else toast('❌ '+(r.error||'Gagal'),'error')}
 async function deleteStaff(p,n){if(!confirm('Padam "'+n+'"?'))return;const r=await api('deleteStaff',{pin:p});if(r.success){toast('✅ '+r.message);clearClientCache('getStaff');loadStaffList()}else toast('❌ '+(r.error||'Gagal'),'error')}
 function loadSettingsForm(){if(S.qrImage&&S.qrImage.startsWith('http'))document.getElementById('qrUrl').value=S.qrImage;if(S.qrImage)document.getElementById('qrPreview').innerHTML='<img src="'+S.qrImage+'" style="max-width:200px;border-radius:14px;border:1px solid var(--border)" onerror="this.style.display=\'none\'"><p style="font-size:0.75rem;color:var(--gray);margin-top:6px">QR semasa</p>';document.getElementById('setBankName').value=S.bankName;document.getElementById('setBankAcc').value=S.bankAccount;document.getElementById('setBankHolder').value=S.bankHolder;document.getElementById('featuredCatInput').value=S.featuredCat||'';updateFeaturedDropdown()}
 function updateFeaturedDropdown(){const fc=S.featuredCat||'';const opt=document.getElementById('newCatFeatured');if(opt){opt.value=fc;opt.textContent=fc?('⭐ '+fc+' (Kategori Utama)'):'⭐ (Kategori Utama - belum ditetapkan)'}const emOpt=document.getElementById('emCatFeatured');if(emOpt){emOpt.value=fc;emOpt.textContent=fc?('⭐ '+fc+' (Kategori Utama)'):'⭐ (Kategori Utama - belum ditetapkan)'}}
@@ -1427,26 +1480,40 @@ async function saveBankInfo(){const bn=document.getElementById('setBankName').va
 
 // ============================================================
 // TAB DAPUR
+// Logik betul:
+// - Tukang masak tekan "Siap" → hanya tandakan kitchenDone=true
+// - Status pesanan KEKAL "pending" — cashier masih perlu selesaikan bayaran
+// - Hanya cashier boleh tukar ke "completed" melalui Tab Senarai
 // ============================================================
 let dapurInterval=null;
-    async function loadDapur(){
+
+async function loadDapur(){
+    const dEl=document.getElementById('dapurDate');
+    if(!dEl.value) dEl.value=today();
+    const selectedDate=dEl.value;
+    const isToday=selectedDate===today();
+    // Auto-refresh label
+    const arLabel=document.getElementById('dapurAutoRefreshLabel');
+    if(arLabel) arLabel.textContent=isToday?'Auto kemaskini setiap 30 saat':'Paparan arkib — auto kemaskini dinyahaktif';
     document.getElementById('dapurList').innerHTML='<div class="loading"><div class="spinner"></div>Memuatkan...</div>';
-    const r=await api('getOrders',{date:today()});
+    const r=await api('getOrders',{date:selectedDate});
     if(!r.success){
         document.getElementById('dapurList').innerHTML='<div class="api-error-box"><strong>❌ Gagal</strong><br>'+esc(r.error||'Cuba semula')+'</div>';
         return;
     }
     const orders=r.orders||[];
-    const pending=orders.filter(o=>o.status==='pending'); // semua staff, tiada filter
+    const isToday2=document.getElementById('dapurDate').value===today();
+    // Hari ini: tunjuk pending sahaja. Tarikh lalu: tunjuk semua (termasuk completed)
+    const pending=isToday2?orders.filter(o=>o.status==='pending'):orders.filter(o=>o.status!=='cancelled');
     const countEl=document.getElementById('dapurCount');
-    if(countEl)countEl.textContent=pending.length+' pesanan';
+    if(countEl)countEl.textContent=pending.length+(isToday2?' menunggu':' pesanan');
     const el=document.getElementById('dapurList');
     if(!pending.length){
-        el.innerHTML='<div class="dapur-empty"><div class="dapur-empty-icon">✅</div><div style="font-weight:700;font-size:1rem;color:var(--success-dark)">Semua pesanan selesai!</div><div style="font-size:0.82rem;margin-top:6px">Tiada pesanan menunggu.</div></div>';
+        el.innerHTML='<div class="dapur-empty"><div class="dapur-empty-icon">'+(isToday2?'✅':'📋')+'</div><div style="font-weight:700;font-size:1rem;color:var(--success-dark)">'+(isToday2?'Semua pesanan selesai!':'Tiada rekod pesanan.')+'</div><div style="font-size:0.82rem;margin-top:6px">'+(isToday2?'Tiada pesanan menunggu.':'Cuba pilih tarikh lain.')+'</div></div>';
         return;
     }
     const now=Date.now();
-    el.innerHTML=pending.map(o=>{
+    const cardsHtml=pending.map(o=>{
         let minsAgo='-',urgency='fresh';
         try{
             const tStr=String(o.time||'');
@@ -1461,11 +1528,90 @@ let dapurInterval=null;
                 else if(diff>=8)urgency='medium';
             }
         }catch(e){}
+
+        const kitchenDone=o.kitchenDone===true;
         const timeCls=urgency==='urgent'?'dapur-time-badge urgent':urgency==='medium'?'dapur-time-badge medium':'dapur-time-badge fresh';
-        const cardCls=urgency==='urgent'?'urgent':'normal';
-        return'<div class="dapur-order-card '+cardCls+'"><div class="dapur-order-top"><span class="dapur-order-num">Pesanan #'+(o.orderNo||o.orderId)+'</span><span class="dapur-table-badge">🪑 '+esc(o.tableNo||'-')+'</span><span class="'+timeCls+'">🕐 '+minsAgo+(urgency==='urgent'?' ⚠️':'')+'</span></div><div class="dapur-staff">👤 '+esc(o.staffName||'-')+'</div><div class="dapur-items-list">'+(o.items||[]).map(i=>'<div class="dapur-item-row"><div class="dapur-item-qty">'+i.qty+'</div><div class="dapur-item-name">'+esc(i.name)+'</div></div>').join('')+'</div><button class="btn-siap" onclick="markDapurSiap(\''+esc(o.orderId)+'\',this)">✅ Siap / Selesai</button></div>';
+        // Card style: kalau siap masak → hijau, kalau urgent → merah, kalau medium → kuning
+        const cardCls=kitchenDone?'kitchen-done':urgency==='urgent'?'urgent':'normal';
+        const safeOid=String(o.orderId||'').replace(/'/g,"\\'");
+
+        // Banner "Siap Masak" kalau tukang masak dah tandakan
+        const kitchenBanner=kitchenDone
+            ?'<div class="kitchen-done-banner">🍳 Masakan Siap — Tunggu Cashier Selesaikan Bayaran</div>'
+            :'';
+
+        // Button: kalau dah siap masak, disable & tunjuk teks berbeza
+        const btnSiap=kitchenDone
+            ?'<button class="btn-siap" disabled style="background:#6b7280;cursor:not-allowed">✅ Sudah Ditandakan Siap</button>'
+            :'<button class="btn-siap" id="btn-siap-'+esc(o.orderId)+'" onclick="markDapurSiap(\''+safeOid+'\',this)">🍳 Tandakan Masakan Siap</button>';
+
+        return'<div class="dapur-order-card '+cardCls+'" id="dapur-card-'+esc(o.orderId)+'">'
+            +kitchenBanner
+            +'<div class="dapur-order-top">'
+            +'<span class="dapur-order-num">Pesanan #'+(o.orderNo||o.orderId)+'</span>'
+            +'<span class="dapur-table-badge">🪑 '+esc(o.tableNo||'-')+'</span>'
+            +'<span class="'+timeCls+'">🕐 '+minsAgo+(urgency==='urgent'&&!kitchenDone?' ⚠️':'')+'</span>'
+            +'</div>'
+            +'<div class="dapur-staff">👤 '+esc(o.staffName||'-')+'</div>'
+            +'<div class="dapur-items-list">'
+            +(o.items||[]).map(i=>'<div class="dapur-item-row"><div class="dapur-item-qty">'+i.qty+'</div><div class="dapur-item-name">'+esc(i.name)+'</div></div>').join('')
+            +'</div>'
+            +btnSiap
+            +'</div>';
     }).join('');
+    el.innerHTML='<div class="dapur-grid">'+cardsHtml+'</div>';
 }
+
+// ============================================================
+// markDapurSiap — TUKANG MASAK tandakan masakan siap
+// Status pesanan KEKAL "pending" — TIDAK ubah ke "completed"
+// Cashier perlu selesaikan bayaran melalui Tab Senarai
+// ============================================================
+async function markDapurSiap(orderId,btn){
+    if(!orderId){toast('ID pesanan tidak sah!','error');return}
+    btn.disabled=true;
+    btn.textContent='⏳ Menyimpan...';
+    // Guna action baru: markKitchenDone — hanya tandakan lajur O, status kekal pending
+    const r=await api('markKitchenDone',{orderId:orderId});
+    if(r.success){
+        beep(true);
+        toast('🍳 Masakan siap! Cashier perlu selesaikan bayaran.');
+        // Update UI card — tunjuk banner hijau, disable button
+        const card=document.getElementById('dapur-card-'+orderId);
+        if(card){
+            card.classList.remove('urgent','normal');
+            card.classList.add('kitchen-done');
+            // Tambah banner
+            const banner=document.createElement('div');
+            banner.className='kitchen-done-banner';
+            banner.textContent='🍳 Masakan Siap — Tunggu Cashier Selesaikan Bayaran';
+            card.insertBefore(banner,card.firstChild);
+            // Disable button
+            btn.textContent='✅ Sudah Ditandakan Siap';
+            btn.style.background='#6b7280';
+            btn.style.cursor='not-allowed';
+        }
+        clearClientCache();
+    }else{
+        beep(false);
+        toast('❌ '+(r.error||'Gagal tandakan pesanan'),'error');
+        btn.disabled=false;
+        btn.textContent='🍳 Tandakan Masakan Siap';
+    }
+}
+
+function startDapurAutoRefresh(){
+    if(dapurInterval)clearInterval(dapurInterval);
+    dapurInterval=setInterval(()=>{
+        const dapurTab=document.getElementById('tab-dapur');
+        const dEl=document.getElementById('dapurDate');
+        const isToday=!dEl||!dEl.value||dEl.value===today();
+        if(dapurTab&&dapurTab.classList.contains('active')&&isToday){
+            loadDapur();
+        }
+    },30000);
+}
+
 // ============================================================
 // PAKEJ LIMITS & MODAL & UTILS
 // ============================================================
@@ -1493,8 +1639,8 @@ async function init(){
         if(info.qrImage)S.qrImage=info.qrImage;if(info.bankName)S.bankName=info.bankName;if(info.bankAccount)S.bankAccount=info.bankAccount;if(info.bankHolder)S.bankHolder=info.bankHolder;if(info.featuredCategory)S.featuredCat=info.featuredCategory;
         if(C.PAKEJ==='premium'&&info.brandColor&&info.brandColor!=='#f97316'){document.documentElement.style.setProperty('--primary',info.brandColor);document.documentElement.style.setProperty('--primary-dark',info.brandColor)}
     }else{document.getElementById('loginShopName').innerHTML='⚠️ Gagal sambung<br><span style="font-size:0.75rem;color:var(--danger-dark)">'+esc(info.error||'Periksa URL API')+'</span>'}
-    
-    if(loadSession()){enterApp()}
+    if(C.PAKEJ==='asas')skipLogin();
+    else if(loadSession()){enterApp()}
     startDapurAutoRefresh();
 }
 init();
